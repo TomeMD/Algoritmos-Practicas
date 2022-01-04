@@ -1,0 +1,150 @@
+Integrantes del grupo
+-----------------------
+
+Julian Barcia Facal julian.bfacal
+Tome Maseda Dorado tome.maseda
+
+
+Maquina Utilizada
+-----------------------
+Modelo:Portátil HP 15-da0051ns
+Memoria:7,7 GiB
+Procesador:Intel® Core™ i5-8250U CPU @ 1.60GHz × 8 
+Tarjeta Gráfica: Intel® UHD Graphics 620 (Kabylake GT2)
+GNOME: 3.28.2
+Tipo Sistema Operativo : 64 bits 
+Almacenamiento: 54,1 GiB
+
+
+
+	Esta práctica cuenta con dos objectivos. Primero, se pretende demostrar empíricamente que la operación crearMonticulo tiene una complejidad de O(n) a la hora de ejecutarse. En la segunda parte, se pretende calcular la complejidad para la ordenación por montículos
+en los casos en los cuales el vector introducido esté ordenado ascendete, descendente y aleatoriamente.
+
+
+	Con este fin se utilizan las siguientes tablas.Estas se componen de  n (tamaño de los vectores utilizados),t(n) (tiempos de ejecución en microsegundos µs ), siendo las consecutivas columnas los valores para obtener las cotas subestimada, ajustada y sobrestimada
+respectivamente.
+
+Si el tiempo de ejecución t(n) no alcanza el tiempo umbral de confianza de 500 µs el algoritmo pasa a ejecutarse 10.000 ocasiones.
+
+=======================
+*: tiempo promedio (en μs) de 10.000 ejecuciones del algoritmo
+=======================
+
+Demostracion empirica de que crearMonticulo se ejecuta en tiempo O(n)
+
+          n           t(n)       t(n)/n^0.7        t(n)/n     t(n)/n^1.3
+*        500       9.308300       0.120113       0.018617      0.002885 #
+*       1000      18.710800       0.148625       0.018711      0.002356 #
+*       2000      37.550800       0.183611       0.018775      0.001920 #
+*       4000      72.537000       0.218332       0.018134      0.001506
+*       8000     143.797400       0.266433       0.017975      0.001213
+*      16000     287.990900       0.328469       0.017999      0.000986
+       32000     574.000000       0.403002       0.017937      0.000798
+       64000    1141.000000       0.493128       0.017828      0.000645
+      128000    2282.000000       0.607112       0.017828      0.000524
+
+
+
+						 C=(0.017850)
+Cota Subestimada = n^0.7
+Cota Ajustada  = n
+Cota Sobrestimada = n^1.3
+
+=======================
+#: Se generan tres anomalías, en tamaños de vector 500, 1000 y 2000 lo que nos indica que la operación no es muy precisa en tamaños pequeños.
+=======================
+
+
+Ordenacion por monticulos con inicializacion ascendente
+
+          n           t(n)         t(n)/n      t(n)/n*log(n)  t(n)/n^1.3
+*        500      41.131400       0.082263       0.013237      0.012750 #
+*       1000      96.237200       0.096237       0.013932      0.012116 #
+*       2000     221.375300       0.110688       0.014562      0.011319
+*       4000     476.678800       0.119170       0.014368      0.009898
+        8000    1030.000000       0.128750       0.014326      0.008686
+       16000    2126.000000       0.132875       0.013726      0.007281
+       32000    4438.000000       0.138687       0.013369      0.006173
+       64000    9254.000000       0.144594       0.013066      0.005228
+      128000   19521.000000       0.152508       0.012969      0.004478
+
+
+						C=(0.014000
+						-0.013000)
+Cota Subestimada = n
+Cota Ajustada  =  n*log(n) 
+Cota Sobrestimada = n^1.3
+
+
+=======================
+#: Para tamaños de vector más pequeños como 500,1000 la operación ordenación por monituclos no resulta tan precisa, generando dos anomalías.
+=======================
+
+Ordenacion por monticulos con inicializacion descendente
+
+          n           t(n)         t(n)/n      t(n)/n*log(n)  t(n)/n^1.3
+*        500      43.812600       0.087625       0.014100      0.013581 #
+*       1000     102.478000       0.102478       0.014835      0.012901 #
+*       2000     230.631400       0.115316       0.015171      0.011792
+*       4000     493.964000       0.123491       0.014889      0.010257
+        8000    1022.000000       0.127750       0.014215      0.008619
+       16000    2124.000000       0.132750       0.013713      0.007274
+       32000    4574.000000       0.142937       0.013779      0.006362
+       64000    9415.000000       0.147109       0.013293      0.005318
+      128000   19469.000000       0.152102       0.012934      0.004467
+
+
+						C=(0.014000
+						-0.013000)
+Cota Subestimada = n
+Cota Ajustada  = n*log(n) 
+Cota Sobrestimada = n^1.3
+
+=======================
+#: Para tamaños de vector más pequeños como 500,1000 la operación ordenación por montículos no resulta tan precisa, generando dos anomalías.
+=======================
+
+
+
+Ordenacion por monticulos con inicializacion aleatoria
+
+          n           t(n)         t(n)/n      t(n)/n*log(n)  t(n)/n^1.3
+*        500      58.091300       0.116183       0.018695      0.018007 #
+*       1000     126.883800       0.126884       0.018368      0.015974 #
+*       2000     274.464200       0.137232       0.018055      0.014033
+        4000     591.000000       0.147750       0.017814      0.012272
+        8000    1260.000000       0.157500       0.017525      0.010626
+       16000    2709.000000       0.169313       0.017490      0.009278
+       32000    5900.000000       0.184375       0.017774      0.008206
+       64000   12603.000000       0.196922       0.017794      0.007119
+      128000   26954.000000       0.210578       0.017907      0.006184
+
+
+						C=0.017700
+Cota Subestimada = n
+Cota Ajustada  = n*log(n)
+Cota Sobrestimada = n^1.3
+
+=======================
+#: Para tamaños de vector más pequeños como 500,1000 la operación ordenación por montículos no resulta tan precisa, generando dos anomalías.
+=======================
+
+Conclusiones
+----------------------
+
+1-.Efectivamente, se comprueba empíricamente que la operación crearMonticulo se ejecuta en un tiempo O(n). Aunque en vectores de tamaño (n)
+	más pequeño la operación no resulta tan exacta.
+
+2-.La ordenación por montículos resulta de complejidad O(n*log(n)) para todos las inicializaciones del vector. Aunque en el caso aleatorio
+	los tiempos de ejecución resultan más precisos.
+	
+3-.A pesar de contar con la misma complejidad, si el vector no está ordenado inicialmente la eficiencia de la operación ordenar es menor,
+	al ser sus tiempos de ejecución mayores que en los casos en el que este ya se encuentra ordenado.
+
+
+
+
+
+
+
+
